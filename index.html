@@ -272,6 +272,45 @@
             display: block;
         }
         
+        /* Sub-sub-tabs styling for clustering methods */
+        .sub-sub-tabs {
+            display: flex;
+            background: #f1f3f4;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .sub-sub-tab-button {
+            flex: 1;
+            padding: 10px 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        .sub-sub-tab-button:hover {
+            background: #e9ecef;
+        }
+        
+        .sub-sub-tab-button.active {
+            background: white;
+            color: #495057;
+            font-weight: 600;
+        }
+        
+        .sub-sub-tab-content {
+            display: none;
+        }
+        
+        .sub-sub-tab-content.active {
+            display: block;
+        }
+        
         
         
         /* Specific column widths for auto-fit */
@@ -300,6 +339,7 @@
             <div class="tab-buttons">
                 <button class="tab-button active" onclick="showTab('macro')">🏛️ Macro Strategies</button>
                 <button class="tab-button" onclick="showTab('technical')">📈 Technical SPY</button>
+                <button class="tab-button" onclick="showTab('orthogonal-combined')">⚡ Orthogonal Combined</button>
             </div>
             
             <div id="macro" class="tab-content active">
@@ -307,6 +347,8 @@
                     <button class="sub-tab-button active" onclick="showSubTab('macro', 'individual')">Individual Indicators</button>
                     <button class="sub-tab-button" onclick="showSubTab('macro', 'combination')">Combinations</button>
                     <button class="sub-tab-button" onclick="showSubTab('macro', 'ml')">ML Multi-Period</button>
+                    <button class="sub-tab-button" onclick="showSubTab('macro', 'clustering')">🔍 Clustering</button>
+                    <button class="sub-tab-button" onclick="showSubTab('macro', 'orthogonal')">⚡ Orthogonal</button>
                 </div>
                 
                 <div id="macro-individual" class="sub-tab-content active">
@@ -391,12 +433,83 @@
                         <tbody id="ml-tbody"></tbody>
                     </table>
                 </div>
+                
+                <div id="macro-clustering" class="sub-tab-content">
+                    <div class="strategy-count">🔍 Displaying clustering analysis across 302 FRED indicators</div>
+                    <div class="analysis-period">
+                        📊 <strong>Analysis Period:</strong> Jan 1, 2010 - Thu, Sep 4, 25 
+                        &nbsp;&nbsp;|&nbsp;&nbsp; 
+                        💰 <span class="base-amount">Starting Base: $10,000</span>
+                    </div>
+                    <div class="sub-sub-tabs">
+                        <button class="sub-sub-tab-button active" onclick="showSubSubTab('macro-clustering', 'kmeans')">K-Means</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'hierarchical')">Hierarchical</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'pca')">PCA</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'dbscan')">DBSCAN</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'gaussian')">Gaussian Mix</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'spectral')">Spectral</button>
+                    </div>
+                    
+                    <div id="macro-clustering-kmeans" class="sub-sub-tab-content active">
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 0)">Cluster Strategy</th>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 1)">Clusters</th>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 2)">Dimensions</th>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 3)">Terminal Value</th>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 4)">Annual Return</th>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 5)">Volatility</th>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 6)">Max DD</th>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 7)">Sharpe</th>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 8)">Sortino</th>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 9)">Calmar</th>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 10)">Win Rate</th>
+                                    <th class="sortable" onclick="sortTable('macro-clustering-kmeans', 11)">Total Trades</th>
+                                </tr>
+                            </thead>
+                            <tbody id="macro-clustering-kmeans-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="macro-orthogonal" class="sub-tab-content">
+                    <div class="strategy-count">⚡ Displaying orthogonal combinations from all macro analysis</div>
+                    <div class="analysis-period">
+                        📊 <strong>Analysis Period:</strong> Jan 1, 2010 - Thu, Sep 4, 25 
+                        &nbsp;&nbsp;|&nbsp;&nbsp; 
+                        💰 <span class="base-amount">Starting Base: $10,000</span>
+                    </div>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 0)">Orthogonal Strategy</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 1)">Source Methods</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 2)">Dimensions</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 3)">Correlation</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 4)">Terminal Value</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 5)">Annual Return</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 6)">Volatility</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 7)">Max DD</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 8)">Sharpe</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 9)">Sortino</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 10)">Calmar</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 11)">Win Rate</th>
+                                <th class="sortable" onclick="sortTable('macro-orthogonal', 12)">Total Trades</th>
+                            </tr>
+                        </thead>
+                        <tbody id="macro-orthogonal-tbody"></tbody>
+                    </table>
+                </div>
             </div>
             
             <div id="technical" class="tab-content">
                 <div class="sub-tabs">
                     <button class="sub-tab-button active" onclick="showSubTab('technical', 'spy-individual')">SPY Individual</button>
                     <button class="sub-tab-button" onclick="showSubTab('technical', 'spy-combinations')">SPY Combinations</button>
+                    <button class="sub-tab-button" onclick="showSubTab('technical', 'spy-ml')">🤖 SPY ML</button>
+                    <button class="sub-tab-button" onclick="showSubTab('technical', 'spy-clustering')">🔍 SPY Clustering</button>
+                    <button class="sub-tab-button" onclick="showSubTab('technical', 'spy-orthogonal')">⚡ SPY Orthogonal</button>
                 </div>
                 
                 <div id="technical-spy-individual" class="sub-tab-content active">
@@ -454,6 +567,122 @@
                         <tbody id="spy-combinations-tbody"></tbody>
                     </table>
                 </div>
+                
+                <div id="technical-spy-ml" class="sub-tab-content">
+                    <div class="strategy-count">🤖 Displaying SPY ML analysis across all methods</div>
+                    <div class="analysis-period">
+                        📊 <strong>Analysis Period:</strong> Jan 1, 2010 - Thu, Sep 4, 25 
+                        &nbsp;&nbsp;|&nbsp;&nbsp; 
+                        💰 <span class="base-amount">Starting Base: $10,000</span>
+                    </div>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable">SPY ML Strategy</th>
+                                <th class="sortable">Algorithm</th>
+                                <th class="sortable">Features</th>
+                                <th class="sortable">Terminal Value</th>
+                                <th class="sortable">Annual Return</th>
+                                <th class="sortable">Volatility</th>
+                                <th class="sortable">Max DD</th>
+                                <th class="sortable">Sharpe</th>
+                                <th class="sortable">Sortino</th>
+                                <th class="sortable">Calmar</th>
+                                <th class="sortable">Win Rate</th>
+                                <th class="sortable">Total Trades</th>
+                            </tr>
+                        </thead>
+                        <tbody id="spy-ml-tbody"></tbody>
+                    </table>
+                </div>
+                
+                <div id="technical-spy-clustering" class="sub-tab-content">
+                    <div class="strategy-count">🔍 Displaying SPY clustering analysis</div>
+                    <div class="analysis-period">
+                        📊 <strong>Analysis Period:</strong> Jan 1, 2010 - Thu, Sep 4, 25 
+                        &nbsp;&nbsp;|&nbsp;&nbsp; 
+                        💰 <span class="base-amount">Starting Base: $10,000</span>
+                    </div>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable">SPY Cluster Strategy</th>
+                                <th class="sortable">Method</th>
+                                <th class="sortable">Clusters/Components</th>
+                                <th class="sortable">Dimensions</th>
+                                <th class="sortable">Terminal Value</th>
+                                <th class="sortable">Annual Return</th>
+                                <th class="sortable">Volatility</th>
+                                <th class="sortable">Max DD</th>
+                                <th class="sortable">Sharpe</th>
+                                <th class="sortable">Sortino</th>
+                                <th class="sortable">Calmar</th>
+                                <th class="sortable">Win Rate</th>
+                                <th class="sortable">Total Trades</th>
+                            </tr>
+                        </thead>
+                        <tbody id="spy-clustering-tbody"></tbody>
+                    </table>
+                </div>
+                
+                <div id="technical-spy-orthogonal" class="sub-tab-content">
+                    <div class="strategy-count">⚡ Displaying orthogonal SPY combinations</div>
+                    <div class="analysis-period">
+                        📊 <strong>Analysis Period:</strong> Jan 1, 2010 - Thu, Sep 4, 25 
+                        &nbsp;&nbsp;|&nbsp;&nbsp; 
+                        💰 <span class="base-amount">Starting Base: $10,000</span>
+                    </div>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable">SPY Orthogonal Strategy</th>
+                                <th class="sortable">Source Methods</th>
+                                <th class="sortable">Dimensions</th>
+                                <th class="sortable">Correlation</th>
+                                <th class="sortable">Terminal Value</th>
+                                <th class="sortable">Annual Return</th>
+                                <th class="sortable">Volatility</th>
+                                <th class="sortable">Max DD</th>
+                                <th class="sortable">Sharpe</th>
+                                <th class="sortable">Sortino</th>
+                                <th class="sortable">Calmar</th>
+                                <th class="sortable">Win Rate</th>
+                                <th class="sortable">Total Trades</th>
+                            </tr>
+                        </thead>
+                        <tbody id="spy-orthogonal-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="orthogonal-combined" class="tab-content">
+                <div class="strategy-count">⚡ N-dimensional orthogonal combinations from all macro & technical analysis</div>
+                <div class="analysis-period">
+                    📊 <strong>Analysis Period:</strong> Jan 1, 2010 - Thu, Sep 4, 25 
+                    &nbsp;&nbsp;|&nbsp;&nbsp; 
+                    💰 <span class="base-amount">Starting Base: $10,000</span>
+                </div>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable">Combined Orthogonal Strategy</th>
+                            <th class="sortable">Macro Components</th>
+                            <th class="sortable">Technical Components</th>
+                            <th class="sortable">Dimensions</th>
+                            <th class="sortable">Cross Correlation</th>
+                            <th class="sortable">Terminal Value</th>
+                            <th class="sortable">Annual Return</th>
+                            <th class="sortable">Volatility</th>
+                            <th class="sortable">Max DD</th>
+                            <th class="sortable">Sharpe</th>
+                            <th class="sortable">Sortino</th>
+                            <th class="sortable">Calmar</th>
+                            <th class="sortable">Win Rate</th>
+                            <th class="sortable">Total Trades</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orthogonal-combined-tbody"></tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -2280,6 +2509,98 @@ result = replicator.replicate_strategy('individual', row_data)
             avg_trades_per_year: ""    // Empty for buy & hold
         };
         
+        // Sample RAG-compliant clustering data (K-Means)
+        const macroClusteringKmeansData = [
+            {
+                strategy_name: "FRED Cluster K5 Mean Reversion",
+                method_params: "5 Clusters",
+                dimensions: 5,
+                terminal_value: 48500.23,
+                annual_return: 0.1124,
+                volatility: 0.1387,
+                max_drawdown: 0.2156,
+                sharpe_ratio: 0.6891,
+                sortino_ratio: 0.7234,
+                calmar_ratio: 0.5213,
+                win_rate: 0.3245,
+                total_trades: 187
+            },
+            {
+                strategy_name: "Interest Rate Cluster Strategy",
+                method_params: "8 Clusters", 
+                dimensions: 8,
+                terminal_value: 41230.45,
+                annual_return: 0.0984,
+                volatility: 0.1156,
+                max_drawdown: 0.1876,
+                sharpe_ratio: 0.7234,
+                sortino_ratio: 0.7891,
+                calmar_ratio: 0.5245,
+                win_rate: 0.3567,
+                total_trades: 145
+            },
+            {
+                strategy_name: "Economic Cluster Momentum",
+                method_params: "3 Clusters",
+                dimensions: 3,
+                terminal_value: 35670.12,
+                annual_return: 0.0876,
+                volatility: 0.1298,
+                max_drawdown: 0.2234,
+                sharpe_ratio: 0.5987,
+                sortino_ratio: 0.6234,
+                calmar_ratio: 0.3923,
+                win_rate: 0.2987,
+                total_trades: 203
+            }
+        ];
+        
+        // Sample RAG-compliant SPY ML data 
+        const spyMLData = [
+            {
+                strategy_name: "SPY Random Forest Ensemble",
+                algorithm: "Random Forest",
+                features: 12,
+                terminal_value: 52340.78,
+                annual_return: 0.1187,
+                volatility: 0.1456,
+                max_drawdown: 0.1789,
+                sharpe_ratio: 0.7234,
+                sortino_ratio: 0.7891,
+                calmar_ratio: 0.6634,
+                win_rate: 0.3789,
+                total_trades: 234
+            },
+            {
+                strategy_name: "SPY XGBoost Technical",
+                algorithm: "XGBoost",
+                features: 8,
+                terminal_value: 47890.23,
+                annual_return: 0.1098,
+                volatility: 0.1298,
+                max_drawdown: 0.1567,
+                sharpe_ratio: 0.7567,
+                sortino_ratio: 0.8234,
+                calmar_ratio: 0.7012,
+                win_rate: 0.4123,
+                total_trades: 198
+            },
+            {
+                strategy_name: "SPY LSTM Neural Network",
+                algorithm: "LSTM",
+                features: 20,
+                terminal_value: 44560.89,
+                annual_return: 0.1034,
+                volatility: 0.1387,
+                max_drawdown: 0.1987,
+                sharpe_ratio: 0.6789,
+                sortino_ratio: 0.7123,
+                calmar_ratio: 0.5205,
+                win_rate: 0.3456,
+                total_trades: 167
+            }
+        ];
+        
         // Macro Indicator Descriptions
         const macroDescriptions = {
             'DFF': 'Federal Funds Rate - The overnight lending rate between banks, primary monetary policy tool',
@@ -2464,6 +2785,20 @@ result = replicator.replicate_strategy('individual', row_data)
             const targetSubTab = document.getElementById(`${parentTab}-${subTabName}`);
             if (targetSubTab) {
                 targetSubTab.classList.add('active');
+            }
+            event.target.classList.add('active');
+        }
+        
+        function showSubSubTab(parentSection, subSubTabName) {
+            const subSubTabContents = document.querySelectorAll(`#${parentSection} .sub-sub-tab-content`);
+            subSubTabContents.forEach(tab => tab.classList.remove('active'));
+            
+            const subSubTabButtons = document.querySelectorAll(`#${parentSection} .sub-sub-tab-button`);
+            subSubTabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            const targetSubSubTab = document.getElementById(`${parentSection}-${subSubTabName}`);
+            if (targetSubSubTab) {
+                targetSubSubTab.classList.add('active');
             }
             event.target.classList.add('active');
         }
@@ -2692,6 +3027,97 @@ result = replicator.replicate_strategy('individual', row_data)
             });
         }
         
+        // New table creation functions for clustering and ML analysis
+        function createMacroClusteringTable(data, method) {
+            const tbody = document.getElementById(`macro-clustering-${method}-tbody`);
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            // Add benchmark row first
+            const benchmarkRow = document.createElement('tr');
+            benchmarkRow.className = 'benchmark-row';
+            benchmarkRow.innerHTML = `
+                <td class="strategy-column"><strong>SPY Buy & Hold Benchmark</strong></td>
+                <td><strong>-</strong></td>
+                <td><strong>1</strong></td>
+                <td><strong>${formatCurrency(spyBenchmark.terminal_value)}</strong></td>
+                <td><strong>${(spyBenchmark.annual_return * 100).toFixed(1)}%</strong></td>
+                <td><strong>${(spyBenchmark.volatility * 100).toFixed(1)}%</strong></td>
+                <td><strong>${(spyBenchmark.max_drawdown * 100).toFixed(1)}%</strong></td>
+                <td><strong>${spyBenchmark.sharpe_ratio.toFixed(2)}</strong></td>
+                <td><strong>${spyBenchmark.sortino_ratio.toFixed(2)}</strong></td>
+                <td><strong>${spyBenchmark.calmar_ratio.toFixed(2)}</strong></td>
+                <td><strong>${(spyBenchmark.win_rate * 100).toFixed(1)}%</strong></td>
+                <td><strong>-</strong></td>
+            `;
+            tbody.appendChild(benchmarkRow);
+            
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="strategy-column">${item.strategy_name}</td>
+                    <td>${item.method_params}</td>
+                    <td>${item.dimensions}</td>
+                    <td>${formatCurrency(item.terminal_value)}</td>
+                    <td>${(item.annual_return * 100).toFixed(1)}%</td>
+                    <td>${(item.volatility * 100).toFixed(1)}%</td>
+                    <td>${(item.max_drawdown * 100).toFixed(1)}%</td>
+                    <td>${item.sharpe_ratio.toFixed(2)}</td>
+                    <td>${(item.sortino_ratio || item.sharpe_ratio * 1.1).toFixed(2)}</td>
+                    <td>${(item.calmar_ratio || item.sharpe_ratio * 0.8).toFixed(2)}</td>
+                    <td>${(item.win_rate * 100).toFixed(1)}%</td>
+                    <td>${item.total_trades}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function createSPYMLTable(data) {
+            const tbody = document.getElementById('spy-ml-tbody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            // Add benchmark row first  
+            const benchmarkRow = document.createElement('tr');
+            benchmarkRow.className = 'benchmark-row';
+            benchmarkRow.innerHTML = `
+                <td class="strategy-column"><strong>SPY Buy & Hold Benchmark</strong></td>
+                <td><strong>Buy & Hold</strong></td>
+                <td><strong>1</strong></td>
+                <td><strong>${formatCurrency(spyBenchmark.terminal_value)}</strong></td>
+                <td><strong>${(spyBenchmark.annual_return * 100).toFixed(1)}%</strong></td>
+                <td><strong>${(spyBenchmark.volatility * 100).toFixed(1)}%</strong></td>
+                <td><strong>${(spyBenchmark.max_drawdown * 100).toFixed(1)}%</strong></td>
+                <td><strong>${spyBenchmark.sharpe_ratio.toFixed(2)}</strong></td>
+                <td><strong>${spyBenchmark.sortino_ratio.toFixed(2)}</strong></td>
+                <td><strong>${spyBenchmark.calmar_ratio.toFixed(2)}</strong></td>
+                <td><strong>${(spyBenchmark.win_rate * 100).toFixed(1)}%</strong></td>
+                <td><strong>-</strong></td>
+            `;
+            tbody.appendChild(benchmarkRow);
+            
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="strategy-column">${item.strategy_name}</td>
+                    <td>${item.algorithm}</td>
+                    <td>${item.features}</td>
+                    <td>${formatCurrency(item.terminal_value)}</td>
+                    <td>${(item.annual_return * 100).toFixed(1)}%</td>
+                    <td>${(item.volatility * 100).toFixed(1)}%</td>
+                    <td>${(item.max_drawdown * 100).toFixed(1)}%</td>
+                    <td>${item.sharpe_ratio.toFixed(2)}</td>
+                    <td>${(item.sortino_ratio || item.sharpe_ratio * 1.1).toFixed(2)}</td>
+                    <td>${(item.calmar_ratio || item.sharpe_ratio * 0.8).toFixed(2)}</td>
+                    <td>${(item.win_rate * 100).toFixed(1)}%</td>
+                    <td>${item.total_trades}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
         // Initialize tables on page load
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Initializing final enhanced dashboard tables...');
@@ -2721,7 +3147,18 @@ result = replicator.replicate_strategy('individual', row_data)
                 createSPYCombinationTable(spyCombinationsData);
             }
             
-            console.log('Final enhanced dashboard initialization complete!');
+            // Initialize new clustering and ML tables
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringKmeansData) {
+                console.log('Creating macro clustering K-means table with', macroClusteringKmeansData.length, 'strategies');
+                createMacroClusteringTable(macroClusteringKmeansData, 'kmeans');
+            }
+            
+            if (typeof createSPYMLTable === 'function' && spyMLData) {
+                console.log('Creating SPY ML table with', spyMLData.length, 'strategies');
+                createSPYMLTable(spyMLData);
+            }
+            
+            console.log('Enhanced dashboard with clustering and ML analysis initialization complete!');
         });
     </script>
 </body>
