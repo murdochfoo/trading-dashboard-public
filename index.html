@@ -810,12 +810,21 @@
         let individualData = [];
         let combinationData = [];
         let spyBenchmark = [];
-        let macroClusteringKmeansData = [];
+        let macroClusteringKMeansData = [];
         let macroClusteringHierarchicalData = [];
         let macroClusteringPcaData = [];
         let macroClusteringDbscanData = [];
         let macroClusteringGaussianData = [];
         let macroClusteringSpectralData = [];
+        let macroClusteringAffinityPropagationData = [];
+        let macroClusteringAgglomerativeClusteringData = [];
+        let macroClusteringBirchData = [];
+        let macroClusteringBisectingKMeansData = [];
+        let macroClusteringHDBSCANData = [];
+        let macroClusteringMeanShiftData = [];
+        let macroClusteringMiniBatchKMeansData = [];
+        let macroClusteringOPTICSData = [];
+        let macroClusteringSpectralClusteringData = [];
         let spyMLData = [];
         let technicalIndividualData = [];
         let technicalCombinationData = [];
@@ -828,12 +837,22 @@
         async function loadDashboardData() {
             try {
                 console.log('🔄 Loading dashboard data...');
-                const response = await fetch('dashboard_data.json');
-                const data = await response.json();
+                const response = await fetch('dashboard_data.json?t=' + Date.now()); // Cache busting
                 
-                // Assign data to global variables
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                console.log('📁 Data file loaded, parsing JSON...');
+                const data = await response.json();
+                console.log('✅ JSON parsed successfully');
+                
+                // Assign data to global variables with logging
                 individualData = data.individualData || [];
+                console.log('📊 Individual data:', individualData.length, 'items');
+                
                 combinationData = data.combinationData || [];
+                console.log('💰 Combination data:', combinationData.length, 'items');
                 spyBenchmark = data.spyBenchmark || {
                     terminal_value: 43265.41,
                     annual_return: 0.10234,
@@ -844,16 +863,32 @@
                     calmar_ratio: 0.5453,
                     win_rate: 0.5234
                 };
-                macroClusteringKmeansData = data.macroClusteringKmeansData || [];
+                macroClusteringKMeansData = data.macroClusteringKMeansData || [];
                 macroClusteringHierarchicalData = data.macroClusteringHierarchicalData || [];
                 macroClusteringPcaData = data.macroClusteringPcaData || [];
-                macroClusteringDbscanData = data.macroClusteringDbscanData || [];
+                macroClusteringDbscanData = data.macroClusteringDBSCANData || [];
                 macroClusteringGaussianData = data.macroClusteringGaussianData || [];
                 macroClusteringSpectralData = data.macroClusteringSpectralData || [];
+                macroClusteringAffinityPropagationData = data.macroClusteringAffinityPropagationData || [];
+                macroClusteringAgglomerativeClusteringData = data.macroClusteringAgglomerativeClusteringData || [];
+                macroClusteringBirchData = data.macroClusteringBirchData || [];
+                macroClusteringBisectingKMeansData = data.macroClusteringBisectingKMeansData || [];
+                macroClusteringHDBSCANData = data.macroClusteringHDBSCANData || [];
+                macroClusteringMeanShiftData = data.macroClusteringMeanShiftData || [];
+                macroClusteringMiniBatchKMeansData = data.macroClusteringMiniBatchKMeansData || [];
+                macroClusteringOPTICSData = data.macroClusteringOPTICSData || [];
+                macroClusteringSpectralClusteringData = data.macroClusteringSpectralClusteringData || [];
                 spyMLData = data.spyMLData || [];
+                console.log('🤖 SPY ML data:', spyMLData.length, 'items');
+                
                 technicalIndividualData = data.technicalIndividualData || [];
+                console.log('📈 Technical individual data:', technicalIndividualData.length, 'items');
+                
                 technicalCombinationData = data.technicalCombinationData || [];
+                console.log('🔗 Technical combination data:', technicalCombinationData.length, 'items');
+                
                 spyClusteringData = data.spyClusteringData || [];
+                console.log('🔍 SPY clustering data:', spyClusteringData.length, 'items');
                 macroOrthogonalData = data.macroOrthogonalData || [];
                 spyOrthogonalData = data.spyOrthogonalData || [];
                 combinedOrthogonalData = data.combinedOrthogonalData || [];
@@ -862,11 +897,23 @@
                 console.log('📊 Individual strategies:', individualData.length);
                 console.log('📊 Combination strategies:', combinationData.length);
                 
-                // Initialize tables after data is loaded
-                initializeTables();
+                // Initialize tables after data is loaded with a small delay to ensure assignment
+                console.log('⏳ Waiting for data assignment completion...');
+                setTimeout(() => {
+                    console.log('🚀 Starting table initialization...');
+                    initializeTables();
+                }, 500); // 500ms delay to ensure all assignments complete
                 
             } catch (error) {
                 console.error('❌ Failed to load dashboard data:', error);
+                console.error('Error details:', error.message, error.stack);
+                
+                // Check if it's a parsing error
+                if (error instanceof SyntaxError) {
+                    console.error('💥 JSON parsing error - data file may be corrupted');
+                } else if (error.name === 'TypeError') {
+                    console.error('💥 Network or fetch error');
+                }
                 
                 // Fallback to minimal demo data
                 spyBenchmark = {
