@@ -949,6 +949,21 @@
                 createSPYClusteringTable(spyClusteringData);
             }
             
+            if (typeof createSPYIndividualTable === 'function' && technicalIndividualData) {
+                console.log('Creating technical individual table with', technicalIndividualData.length, 'strategies');
+                createSPYIndividualTable(technicalIndividualData);
+            }
+            
+            if (typeof createSPYCombinationTable === 'function' && technicalCombinationData) {
+                console.log('Creating technical combination table with', technicalCombinationData.length, 'strategies');
+                createSPYCombinationTable(technicalCombinationData);
+            }
+            
+            if (typeof createMLTable === 'function' && spyMLData) {
+                console.log('Creating ML analysis table with', spyMLData.length, 'strategies');
+                createMLTable(spyMLData);
+            }
+            
             if (typeof createOrthogonalTable === 'function' && macroOrthogonalData) {
                 console.log('Creating macro orthogonal table with', macroOrthogonalData.length, 'strategies');
                 createOrthogonalTable(macroOrthogonalData, 'macro-orthogonal-tbody');
