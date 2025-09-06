@@ -977,9 +977,9 @@
                 createMacroClusteringTable(macroClusteringPcaData, 'pca');
             }
             
-            if (typeof createMacroClusteringTable === 'function' && macroClusteringDbscanData) {
-                console.log('Creating macro clustering dbscan table with', macroClusteringDbscanData.length, 'strategies');
-                createMacroClusteringTable(macroClusteringDbscanData, 'dbscan');
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringDBSCANData) {
+                console.log('Creating macro clustering dbscan table with', macroClusteringDBSCANData.length, 'strategies');
+                createMacroClusteringTable(macroClusteringDBSCANData, 'dbscan');
             }
             
             if (typeof createMacroClusteringTable === 'function' && macroClusteringGaussianData) {
