@@ -880,7 +880,10 @@
         function initializeTables() {
             console.log('🚀 Initializing dashboard tables...');
             
-                    }
+            if (typeof createMacroIndividualTable === 'function' && individualData) {
+                console.log('Creating macro individual table with', individualData.length, 'strategies');
+                createMacroIndividualTable(individualData);
+            }
             
             if (typeof createMacroCombinationTable === 'function' && combinationData) {
                 console.log('Creating macro combination table with', combinationData.length, 'strategies');
