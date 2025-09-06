@@ -1529,87 +1529,10 @@
         // Initialize tables on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadDashboardData(); // Load external data instead of inline initialization
-            
-                    }
-            
-            if (typeof createMacroCombinationTable === 'function' && combinationData) {
-                console.log('Creating macro combination table with', combinationData.length, 'strategies');
-                createMacroCombinationTable(combinationData);
-            }
-            
-            if (typeof createMLTable === 'function' && mlData) {
-                console.log('Creating ML table with', mlData.length, 'strategies');
-                createMLTable(mlData);
-            }
-            
-            if (typeof createSPYIndividualTable === 'function' && spyIndividualData) {
-                console.log('Creating SPY individual table with', spyIndividualData.length, 'strategies');
-                createSPYIndividualTable(spyIndividualData);
-            }
-            
-            if (typeof createSPYCombinationTable === 'function' && spyCombinationsData) {
-                console.log('Creating SPY combinations table with', spyCombinationsData.length, 'strategies');
-                createSPYCombinationTable(spyCombinationsData);
-            }
-            
-            // Initialize new clustering and ML tables
-            if (typeof createMacroClusteringTable === 'function' && macroClusteringKmeansData) {
-                console.log('Creating macro clustering K-means table with', macroClusteringKmeansData.length, 'strategies');
-                createMacroClusteringTable(macroClusteringKmeansData, 'kmeans');
-            }
-
-            if (typeof createMacroClusteringTable === 'function' && macroClusteringHierarchicalData) {
-                console.log('Creating macro clustering hierarchical table with', macroClusteringHierarchicalData.length, 'strategies');
-                createMacroClusteringTable(macroClusteringHierarchicalData, 'hierarchical');
-            }
-
-            if (typeof createMacroClusteringTable === 'function' && macroClusteringPcaData) {
-                console.log('Creating macro clustering pca table with', macroClusteringPcaData.length, 'strategies');
-                createMacroClusteringTable(macroClusteringPcaData, 'pca');
-            }
-
-            if (typeof createMacroClusteringTable === 'function' && macroClusteringDbscanData) {
-                console.log('Creating macro clustering dbscan table with', macroClusteringDbscanData.length, 'strategies');
-                createMacroClusteringTable(macroClusteringDbscanData, 'dbscan');
-            }
-
-            if (typeof createMacroClusteringTable === 'function' && macroClusteringGaussianData) {
-                console.log('Creating macro clustering gaussian table with', macroClusteringGaussianData.length, 'strategies');
-                createMacroClusteringTable(macroClusteringGaussianData, 'gaussian');
-            }
-
-            if (typeof createMacroClusteringTable === 'function' && macroClusteringSpectralData) {
-                console.log('Creating macro clustering spectral table with', macroClusteringSpectralData.length, 'strategies');
-                createMacroClusteringTable(macroClusteringSpectralData, 'spectral');
-            }
-            
-            if (typeof createSPYMLTable === 'function' && spyMLData) {
-                console.log('Creating SPY ML table with', spyMLData.length, 'strategies');
-                createSPYMLTable(spyMLData);
-            }
-            
-            if (typeof createSPYClusteringTable === 'function' && spyClusteringData) {
-                console.log('Creating SPY clustering table with', spyClusteringData.length, 'strategies');
-                createSPYClusteringTable(spyClusteringData);
-            }
-            
-            if (typeof createOrthogonalTable === 'function' && macroOrthogonalData) {
-                console.log('Creating macro orthogonal table with', macroOrthogonalData.length, 'strategies');
-                createOrthogonalTable(macroOrthogonalData, 'macro-orthogonal-tbody');
-            }
-            
-            if (typeof createOrthogonalTable === 'function' && spyOrthogonalData) {
-                console.log('Creating SPY orthogonal table with', spyOrthogonalData.length, 'strategies');
-                createOrthogonalTable(spyOrthogonalData, 'spy-orthogonal-tbody');
-            }
-            
-            if (typeof createOrthogonalTable === 'function' && combinedOrthogonalData) {
-                console.log('Creating combined orthogonal table with', combinedOrthogonalData.length, 'strategies');
-                createOrthogonalTable(combinedOrthogonalData, 'orthogonal-combined-tbody');
-            }
-            
-            console.log('Enhanced dashboard with clustering and ML analysis initialization complete!');
         });
+        
+        
+        // All table initialization is now handled in initializeTables() function
     </script>
 </body>
 </html>
