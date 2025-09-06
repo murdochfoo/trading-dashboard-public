@@ -976,6 +976,18 @@
             return `$${value.toFixed(1)}`;
         }
         
+        // Macro indicator descriptions for tooltips
+        const macroDescriptions = {
+            'DEFAULT': 'Trading strategy based on economic indicators',
+            'T10Y3M': 'Treasury 10-Year minus 3-Month yield curve spread',
+            'BAMLC0A0CM': 'Investment grade corporate bond spread',
+            'DGS30': '30-Year Treasury constant maturity rate',
+            'VIXCLS': 'VIX volatility index',
+            'DGS20': '20-Year Treasury constant maturity rate',
+            'DCOILBRENTEU': 'Brent crude oil price',
+            'DCOILWTICO': 'West Texas Intermediate crude oil price'
+        };
+
         // Create tooltip wrapper function
         function createTooltip(text, description) {
             if (!description) description = macroDescriptions['DEFAULT'];
