@@ -443,11 +443,17 @@
                     </div>
                     <div class="sub-sub-tabs">
                         <button class="sub-sub-tab-button active" onclick="showSubSubTab('macro-clustering', 'kmeans')">K-Means</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'minibatchkmeans')">Mini-Batch K-Means</button>
                         <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'hierarchical')">Hierarchical</button>
-                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'pca')">PCA</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'agglomerativeclustering')">Agglomerative</button>
                         <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'dbscan')">DBSCAN</button>
-                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'gaussian')">Gaussian Mix</button>
-                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'spectral')">Spectral</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'hdbscan')">HDBSCAN</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'optics')">OPTICS</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'spectralclustering')">Spectral</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'meanshift')">Mean Shift</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'affinitypropagation')">Affinity Prop</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'birch')">BIRCH</button>
+                        <button class="sub-sub-tab-button" onclick="showSubSubTab('macro-clustering', 'bisectingkmeans')">Bisecting K-Means</button>
                     </div>
                     
                     <div id="macro-clustering-kmeans" class="sub-sub-tab-content active">
@@ -689,18 +695,18 @@
                     <table class="results-table">
                         <thead>
                             <tr>
-                                <th class="sortable">SPY ML Strategy</th>
-                                <th class="sortable">Algorithm</th>
-                                <th class="sortable">Features</th>
-                                <th class="sortable">Terminal Value</th>
-                                <th class="sortable">Annual Return</th>
-                                <th class="sortable">Volatility</th>
-                                <th class="sortable">Max DD</th>
-                                <th class="sortable">Sharpe</th>
-                                <th class="sortable">Sortino</th>
-                                <th class="sortable">Calmar</th>
-                                <th class="sortable">Win Rate</th>
-                                <th class="sortable">Total Trades</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 0)">SPY ML Strategy</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 1)">Algorithm</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 2)">Features</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 3)">Terminal Value</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 4)">Annual Return</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 5)">Volatility</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 6)">Max DD</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 7)">Sharpe</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 8)">Sortino</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 9)">Calmar</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 10)">Win Rate</th>
+                                <th class="sortable" onclick="sortTable('spy-ml', 11)">Total Trades</th>
                             </tr>
                         </thead>
                         <tbody id="spy-ml-tbody"></tbody>
@@ -717,19 +723,19 @@
                     <table class="results-table">
                         <thead>
                             <tr>
-                                <th class="sortable">SPY Cluster Strategy</th>
-                                <th class="sortable">Method</th>
-                                <th class="sortable">Clusters/Components</th>
-                                <th class="sortable">Dimensions</th>
-                                <th class="sortable">Terminal Value</th>
-                                <th class="sortable">Annual Return</th>
-                                <th class="sortable">Volatility</th>
-                                <th class="sortable">Max DD</th>
-                                <th class="sortable">Sharpe</th>
-                                <th class="sortable">Sortino</th>
-                                <th class="sortable">Calmar</th>
-                                <th class="sortable">Win Rate</th>
-                                <th class="sortable">Total Trades</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 0)">SPY Cluster Strategy</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 1)">Method</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 2)">Clusters/Components</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 3)">Dimensions</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 4)">Terminal Value</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 5)">Annual Return</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 6)">Volatility</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 7)">Max DD</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 8)">Sharpe</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 9)">Sortino</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 10)">Calmar</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 11)">Win Rate</th>
+                                <th class="sortable" onclick="sortTable('spy-clustering', 12)">Total Trades</th>
                             </tr>
                         </thead>
                         <tbody id="spy-clustering-tbody"></tbody>
@@ -746,19 +752,19 @@
                     <table class="results-table">
                         <thead>
                             <tr>
-                                <th class="sortable">SPY Orthogonal Strategy</th>
-                                <th class="sortable">Sources</th>
-                                <th class="sortable">Dimensions</th>
-                                <th class="sortable">Correlation</th>
-                                <th class="sortable">Terminal Value</th>
-                                <th class="sortable">Annual Return</th>
-                                <th class="sortable">Volatility</th>
-                                <th class="sortable">Max DD</th>
-                                <th class="sortable">Sharpe</th>
-                                <th class="sortable">Sortino</th>
-                                <th class="sortable">Calmar</th>
-                                <th class="sortable">Win Rate</th>
-                                <th class="sortable">Total Trades</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 0)">SPY Orthogonal Strategy</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 1)">Sources</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 2)">Dimensions</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 3)">Correlation</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 4)">Terminal Value</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 5)">Annual Return</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 6)">Volatility</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 7)">Max DD</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 8)">Sharpe</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 9)">Sortino</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 10)">Calmar</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 11)">Win Rate</th>
+                                <th class="sortable" onclick="sortTable('spy-orthogonal', 12)">Total Trades</th>
                             </tr>
                         </thead>
                         <tbody id="spy-orthogonal-tbody"></tbody>
@@ -776,20 +782,20 @@
                 <table class="results-table">
                     <thead>
                         <tr>
-                            <th class="sortable">Combined Orthogonal Strategy</th>
-                            <th class="sortable">Macro Components</th>
-                            <th class="sortable">Technical Components</th>
-                            <th class="sortable">Dimensions</th>
-                            <th class="sortable">Cross Correlation</th>
-                            <th class="sortable">Terminal Value</th>
-                            <th class="sortable">Annual Return</th>
-                            <th class="sortable">Volatility</th>
-                            <th class="sortable">Max DD</th>
-                            <th class="sortable">Sharpe</th>
-                            <th class="sortable">Sortino</th>
-                            <th class="sortable">Calmar</th>
-                            <th class="sortable">Win Rate</th>
-                            <th class="sortable">Total Trades</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 0)">Combined Orthogonal Strategy</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 1)">Macro Components</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 2)">Technical Components</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 3)">Dimensions</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 4)">Cross Correlation</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 5)">Terminal Value</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 6)">Annual Return</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 7)">Volatility</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 8)">Max DD</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 9)">Sharpe</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 10)">Sortino</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 11)">Calmar</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 12)">Win Rate</th>
+                            <th class="sortable" onclick="sortTable('orthogonal-combined', 13)">Total Trades</th>
                         </tr>
                     </thead>
                     <tbody id="orthogonal-combined-tbody"></tbody>
@@ -937,6 +943,41 @@
             if (typeof createMacroClusteringTable === 'function' && macroClusteringSpectralData) {
                 console.log('Creating macro clustering spectral table with', macroClusteringSpectralData.length, 'strategies');
                 createMacroClusteringTable(macroClusteringSpectralData, 'spectral');
+            }
+            
+            // NEW CLUSTERING METHODS
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringKMeansData) {
+                createMacroClusteringTable(macroClusteringKMeansData, 'minibatchkmeans');
+            }
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringMiniBatchKMeansData) {
+                createMacroClusteringTable(macroClusteringMiniBatchKMeansData, 'minibatchkmeans');
+            }
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringAgglomerativeClusteringData) {
+                createMacroClusteringTable(macroClusteringAgglomerativeClusteringData, 'agglomerativeclustering');
+            }
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringDBSCANData) {
+                createMacroClusteringTable(macroClusteringDBSCANData, 'hdbscan');
+            }
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringHDBSCANData) {
+                createMacroClusteringTable(macroClusteringHDBSCANData, 'hdbscan');
+            }
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringOPTICSData) {
+                createMacroClusteringTable(macroClusteringOPTICSData, 'optics');
+            }
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringSpectralClusteringData) {
+                createMacroClusteringTable(macroClusteringSpectralClusteringData, 'spectralclustering');
+            }
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringMeanShiftData) {
+                createMacroClusteringTable(macroClusteringMeanShiftData, 'meanshift');
+            }
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringAffinityPropagationData) {
+                createMacroClusteringTable(macroClusteringAffinityPropagationData, 'affinitypropagation');
+            }
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringBirchData) {
+                createMacroClusteringTable(macroClusteringBirchData, 'birch');
+            }
+            if (typeof createMacroClusteringTable === 'function' && macroClusteringBisectingKMeansData) {
+                createMacroClusteringTable(macroClusteringBisectingKMeansData, 'bisectingkmeans');
             }
             
             if (typeof createSPYMLTable === 'function' && spyMLData) {
