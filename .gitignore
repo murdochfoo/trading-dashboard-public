@@ -1,0 +1,30 @@
+
+
+# Python scripts with trading logic
+*.py
+
+# Backup files
+*_backup.*
+*backup*
+
+# Log files
+*.log
+
+# Development files
+dev-server.py
+create_*.py
+fix_*.py
+test_*.py
+verify_*.py
+debug_*.py
+generate_*.py
+comprehensive_*.py
+restructure_*.py
+update_*.py
+check_*.py
+quick_*.py
+final_*.py
+
+# Keep only essential files for dashboard
+!dev
+
