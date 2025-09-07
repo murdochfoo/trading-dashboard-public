@@ -1,0 +1,219 @@
+name: 🚀 Trading Dashboard CI/CD
+
+on:
+  push:
+    branches:
+      - development
+      - staging
+      - main
+  pull_request:
+    branches:
+      - staging
+      - main
+
+jobs:
+  # ===== TESTING & VALIDATION =====
+  test-and-validate:
+    name: 🧪 Test & Validate
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install playwright pytest requests
+        playwright install chromium
+        
+    - name: 🔍 Validate HTML structure
+      run: |
+        python -c "
+        import re
+        with open('index.html', 'r') as f:
+            content = f.read()
+        
+        # Check for basic HTML structure
+        assert '<html' in content, 'Missing HTML tag'
+        assert '<head>' in content, 'Missing head section'
+        assert '<body>' in content, 'Missing body section'
+        assert 'dashboard_data.json' in content, 'Missing data file reference'
+        
+        print('✅ HTML structure validation passed')
+        "
+        
+    - name: 🔍 Validate JSON data structure
+      run: |
+        python -c "
+        import json
+        with open('dashboard_data.json', 'r') as f:
+            data = json.load(f)
+        
+        required_keys = [
+            'individualData', 'combinationData', 'technicalIndividualData',
+            'technicalCombinationData', 'spyMLData', 'spyClusteringData'
+        ]
+        
+        for key in required_keys:
+            assert key in data, f'Missing required key: {key}'
+            assert isinstance(data[key], list), f'{key} is not a list'
+            assert len(data[key]) > 0, f'{key} is empty'
+        
+        total_strategies = sum(len(v) for k, v in data.items() if isinstance(v, list))
+        print(f'✅ JSON validation passed - {total_strategies} total strategies')
+        "
+        
+    - name: 🎭 Run Playwright tests
+      run: |
+        python -c "
+        import asyncio
+        from playwright.async_api import async_playwright
+        
+        async def test_dashboard():
+            print('🎭 Starting Playwright tests...')
+            playwright = await async_playwright().start()
+            browser = await playwright.chromium.launch(headless=True)
+            page = await browser.new_page()
+            
+            # Test local file
+            await page.goto('file://' + '/'.join([$(pwd), 'index.html']))
+            await page.wait_for_timeout(3000)
+            
+            # Check if dashboard loads
+            title = await page.title()
+            assert 'Trading Dashboard' in title or 'Portfolio' in title, f'Wrong title: {title}'
+            
+            # Check for key elements
+            individual_table = await page.query_selector('#individual-tbody')
+            assert individual_table is not None, 'Individual table not found'
+            
+            await browser.close()
+            print('✅ Playwright tests passed')
+        
+        asyncio.run(test_dashboard())
+        "
+        
+    - name: ✅ RAG Compliance Check
+      run: |
+        python -c "
+        import json
+        with open('dashboard_data.json', 'r') as f:
+            data = json.load(f)
+        
+        # Check for realistic performance metrics
+        for key, strategies in data.items():
+            if isinstance(strategies, list) and strategies:
+                for strategy in strategies:
+                    if 'annual_return' in strategy:
+                        annual_return = strategy['annual_return']
+                        assert 0.01 <= annual_return <= 0.30, f'Unrealistic annual return: {annual_return}'
+                    
+                    if 'max_drawdown' in strategy:
+                        max_dd = strategy['max_drawdown']
+                        assert max_dd <= 0, f'Max drawdown should be negative: {max_dd}'
+                    
+                    if 'win_rate' in strategy:
+                        win_rate = strategy['win_rate']
+                        assert 0.2 <= win_rate <= 0.8, f'Unrealistic win rate: {win_rate}'
+        
+        print('✅ RAG compliance check passed - all metrics are realistic')
+        "
+
+  # ===== STAGING DEPLOYMENT =====
+  deploy-staging:
+    name: 🚦 Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: test-and-validate
+    if: github.ref == 'refs/heads/staging'
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🚀 Deploy to staging branch
+      run: |
+        echo "🚦 Deploying to staging environment"
+        echo "This would deploy to a staging URL like: username.github.io/staging"
+        echo "For now, staging deployment is simulated"
+
+  # ===== PRODUCTION DEPLOYMENT =====
+  deploy-production:
+    name: 🌟 Deploy to Production
+    runs-on: ubuntu-latest
+    needs: test-and-validate
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🌟 Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .
+        publish_branch: gh-pages
+        
+    - name: 📊 Post-deployment verification
+      run: |
+        echo "🌟 Production deployment completed"
+        echo "Site will be available at: https://murdochfoo.github.io/trading-dashboard-public/"
+        echo "Waiting 30 seconds for deployment..."
+        sleep 30
+        
+    - name: 🔍 Verify production deployment
+      run: |
+        python -c "
+        import requests
+        import time
+        
+        url = 'https://murdochfoo.github.io/trading-dashboard-public/'
+        
+        for attempt in range(5):
+            try:
+                response = requests.get(url, timeout=30)
+                if response.status_code == 200:
+                    print(f'✅ Production site is live: {url}')
+                    break
+                else:
+                    print(f'⚠️ Status code: {response.status_code}')
+            except Exception as e:
+                print(f'⚠️ Attempt {attempt + 1} failed: {str(e)}')
+                if attempt < 4:
+                    time.sleep(10)
+        else:
+            print('❌ Production verification failed after 5 attempts')
+            exit(1)
+        "
+
+  # ===== SECURITY SCAN =====
+  security-scan:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🔍 Check for sensitive data
+      run: |
+        echo "🔒 Scanning for sensitive information..."
+        
+        # Check for common sensitive patterns
+        if grep -r -i "password\|secret\|key\|token" --exclude-dir=.git .; then
+          echo "⚠️ Potential sensitive information found"
+        else
+          echo "✅ No obvious sensitive information detected"
+        fi
+        
+        # Check file sizes (prevent accidental large files)
+        find . -size +10M -not -path "./.git/*" -exec echo "⚠️ Large file detected: {} ($(du -h {} | cut -f1))" \;
+        
+        echo "🔒 Security scan completed"
