@@ -1,0 +1,19 @@
+#!/bin/bash
+# 🚀 Start Development - Just run: ./dev
+
+echo "🚀 STARTING DEVELOPMENT ENVIRONMENT"
+echo "=================================="
+
+# Go to development directory
+cd /home/ib/trading-dashboard-dev
+
+# Make sure we're on development branch
+git checkout development 2>/dev/null || echo "Git checkout failed or not in repo"
+
+# Start development server with auto port detection
+echo "📍 Starting local server (auto-detecting port)..."
+echo "💡 Press Ctrl+C to stop"
+echo "✨ Edit files and refresh browser to see changes!"
+echo ""
+
+python3 dev-server.py --port 8000

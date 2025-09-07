@@ -1,0 +1,34 @@
+#!/bin/bash
+# 💾 Save Changes - Just run: ./save "your message"
+
+echo "💾 SAVING YOUR CHANGES"
+echo "======================"
+
+if [ -z "$1" ]; then
+    echo "❌ Please provide a message: ./save \"what you changed\""
+    exit 1
+fi
+
+cd /home/ib/trading-dashboard-dev
+
+# Make sure we're on development branch
+git checkout development
+
+# Add all changes
+git add .
+
+# Check if there are changes
+if git diff --cached --quiet; then
+    echo "✅ No changes to save"
+    exit 0
+fi
+
+# Commit with message
+git commit -m "$1
+
+🤖 Generated with [Claude Code](https://claude.ai/code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
+
+echo "✅ Changes saved to development branch"
+echo "🚀 Run './deploy' to push to staging for review"

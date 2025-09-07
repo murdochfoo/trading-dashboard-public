@@ -1,0 +1,52 @@
+#!/bin/bash
+# 💡 Help Guide - Just run: ./help
+
+echo "💡 TRADING DASHBOARD DEVELOPMENT COMMANDS"
+echo "========================================="
+echo ""
+
+echo "🚀 DAILY DEVELOPMENT:"
+echo "  ./dev                   - Start development server (http://localhost:8000)"
+echo "  ./save \"your message\"   - Save changes with commit message"
+echo "  ./status                - Check what needs to be deployed"
+echo ""
+
+echo "🚀 DEPLOYMENT:"
+echo "  ./deploy                - Deploy to staging (needs PR)"
+echo "  ./deploy-staging        - Deploy to staging (automatic)"
+echo "  ./deploy-production     - Deploy to live website"
+echo ""
+
+echo "🔍 MONITORING:"
+echo "  ./check-live            - Check if live website is working"
+echo "  ./logs                  - Show recent git commits"
+echo ""
+
+echo "⚠️ EMERGENCY:"
+echo "  ./rollback              - Undo last deployment"
+echo "  ./reset                 - Reset to clean development state"
+echo ""
+
+echo "📁 DIRECTORIES:"
+echo "  Development:  /home/ib/trading-dashboard-dev    (work here)"
+echo "  Production:   /home/ib/trading-dashboard-public (don't touch!)"
+echo ""
+
+echo "🌐 URLS:"
+echo "  Local:       http://localhost:8000"
+echo "  Live site:   https://murdochfoo.github.io/trading-dashboard-public/"
+echo "  GitHub:      https://github.com/murdochfoo/trading-dashboard-public"
+echo ""
+
+echo "📋 TYPICAL WORKFLOW:"
+echo "  1. ./dev                          # Start coding"
+echo "  2. Edit files, save, refresh browser"
+echo "  3. ./save \"added new feature\"     # Save changes"
+echo "  4. ./deploy-staging               # Deploy to staging"
+echo "  5. ./deploy-production            # Deploy to live site"
+echo ""
+
+echo "🆘 NEED HELP?"
+echo "  - All commands are safe to run multiple times"
+echo "  - Use './status' to see what's happening"
+echo "  - Each script shows what it's doing"

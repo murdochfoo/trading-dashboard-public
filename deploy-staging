@@ -1,0 +1,27 @@
+#!/bin/bash
+# 🚦 Deploy to Staging (Auto) - Just run: ./deploy-staging
+
+echo "🚦 AUTO-DEPLOYING TO STAGING"
+echo "============================="
+
+cd /home/ib/trading-dashboard-dev
+
+# Push development changes
+git checkout development
+git push origin development
+
+# Switch to staging and merge development
+echo "🔄 Merging development → staging..."
+git checkout staging
+git pull origin staging
+git merge development
+
+# Push staging
+git push origin staging
+
+echo ""
+echo "✅ Deployed to staging!"
+echo "🧪 GitHub Actions will run tests"
+echo "🌐 Staging will be updated automatically"
+echo ""
+echo "🚀 Ready for production? Run: ./deploy-production"
