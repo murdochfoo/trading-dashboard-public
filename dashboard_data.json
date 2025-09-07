@@ -2523,36 +2523,6 @@
       "avg_trades_per_year": 12.733333333333333
     }
   ],
-  "spyBenchmark": {
-    "terminal_value": 43265.41,
-    "annual_return": 0.10234,
-    "volatility": 0.15435,
-    "max_drawdown": -0.18766,
-    "sharpe_ratio": 0.6634,
-    "sortino_ratio": 0.9845,
-    "calmar_ratio": 0.5453,
-    "win_rate": 0.5234
-  },
-  "macroClusteringGaussianData": [
-    {
-      "strategy_name": "Macro GaussianMixture Clustering Analysis",
-      "method_name": "GaussianMixture",
-      "method_params": "3 variants tested",
-      "dimensions": 14,
-      "variants_tested": 3,
-      "description": "Gaussian Mixture Models assume data comes from mixture of Gaussians",
-      "tooltip": "Probabilistic clustering that models data as mixture of Gaussian distributions. Provides soft cluster assignments.",
-      "terminal_value": 52051.64268808524,
-      "annual_return": 0.288473093888326,
-      "volatility": 0.1930728917585245,
-      "max_drawdown": -0.07970022320692989,
-      "sharpe_ratio": 1.9083984165745946,
-      "sortino_ratio": 2.1880043180688444,
-      "calmar_ratio": 1.9582574467073357,
-      "win_rate": 0.48427477907352307,
-      "total_trades": 59
-    }
-  ],
   "spyMLData": [
     {
       "strategy_name": "SPY Random Forest Model",
@@ -34265,44 +34235,24 @@
       "total_trades": 78
     }
   ],
-  "macroClusteringMiniBatchKMeansData": [
+  "macroClusteringGaussianData": [
     {
-      "strategy_name": "Macro MiniBatchKMeans Clustering Analysis",
-      "method_name": "MiniBatchKMeans",
+      "strategy_name": "Macro GaussianMixture Clustering Analysis",
+      "method_name": "GaussianMixture",
       "method_params": "3 variants tested",
-      "dimensions": 18,
+      "dimensions": 14,
       "variants_tested": 3,
-      "description": "Mini-Batch K-Means uses small random batches for faster clustering of large datasets",
-      "tooltip": "Memory-efficient variant of K-Means that processes data in small batches, ideal for large-scale macro indicator analysis.",
-      "terminal_value": 62451.703377031394,
-      "annual_return": 0.11509088416339217,
-      "volatility": 0.1646987327451091,
-      "max_drawdown": -0.16948680540294947,
-      "sharpe_ratio": 0.8094505966445391,
-      "sortino_ratio": 1.0095160037922177,
-      "calmar_ratio": 1.263492011575062,
-      "win_rate": 0.6376914813152603,
-      "total_trades": 54
-    }
-  ],
-  "macroClusteringAgglomerativeClusteringData": [
-    {
-      "strategy_name": "Macro Agglomerative Clustering Analysis",
-      "method_name": "Agglomerative",
-      "method_params": "4 variants tested",
-      "dimensions": 25,
-      "variants_tested": 4,
-      "description": "Hierarchical clustering builds tree of clusters using linkage criteria",
-      "tooltip": "Bottom-up clustering that merges closest clusters iteratively. Provides hierarchy of relationships between economic indicators.",
-      "terminal_value": 67215.06354818484,
-      "annual_return": 0.2579077579487006,
-      "volatility": 0.16444138861569776,
-      "max_drawdown": -0.20418057979760668,
-      "sharpe_ratio": 0.9287747586604503,
-      "sortino_ratio": 1.7771350751328736,
-      "calmar_ratio": 1.809064575049156,
-      "win_rate": 0.5978790769376198,
-      "total_trades": 140
+      "description": "Gaussian Mixture Models assume data comes from mixture of Gaussians",
+      "tooltip": "Probabilistic clustering that models data as mixture of Gaussian distributions. Provides soft cluster assignments.",
+      "terminal_value": 52051.64268808524,
+      "annual_return": 0.288473093888326,
+      "volatility": 0.1930728917585245,
+      "max_drawdown": -0.07970022320692989,
+      "sharpe_ratio": 1.9083984165745946,
+      "sortino_ratio": 2.1880043180688444,
+      "calmar_ratio": 1.9582574467073357,
+      "win_rate": 0.48427477907352307,
+      "total_trades": 59
     }
   ],
   "macroClusteringDBSCANData": [
@@ -34325,26 +34275,6 @@
       "total_trades": 121
     }
   ],
-  "macroClusteringOPTICSData": [
-    {
-      "strategy_name": "Macro OPTICS Clustering Analysis",
-      "method_name": "OPTICS",
-      "method_params": "3 variants tested",
-      "dimensions": 14,
-      "variants_tested": 3,
-      "description": "OPTICS creates ordering of points for density-based clustering",
-      "tooltip": "Density-based clustering that produces hierarchical cluster structure. Better than DBSCAN for varying densities.",
-      "terminal_value": 70151.62012317256,
-      "annual_return": 0.22428670158516562,
-      "volatility": 0.22045795713386052,
-      "max_drawdown": -0.20592462895931413,
-      "sharpe_ratio": 0.8765815672506045,
-      "sortino_ratio": 2.769551230360614,
-      "calmar_ratio": 1.67814440818296,
-      "win_rate": 0.5677418965323698,
-      "total_trades": 137
-    }
-  ],
   "macroClusteringSpectralClusteringData": [
     {
       "strategy_name": "Macro SpectralClustering Clustering Analysis",
@@ -34365,84 +34295,24 @@
       "total_trades": 62
     }
   ],
-  "macroClusteringMeanShiftData": [
+  "macroClusteringAgglomerativeClusteringData": [
     {
-      "strategy_name": "Macro MeanShift Clustering Analysis",
-      "method_name": "MeanShift",
-      "method_params": "3 variants tested",
-      "dimensions": 28,
-      "variants_tested": 3,
-      "description": "Mean Shift finds modes in density distribution of data points",
-      "tooltip": "Non-parametric clustering that automatically determines number of clusters by finding density modes.",
-      "terminal_value": 29116.05147613144,
-      "annual_return": 0.25651445603696543,
-      "volatility": 0.2629678463576699,
-      "max_drawdown": -0.14830851185638427,
-      "sharpe_ratio": 1.8550504858593,
-      "sortino_ratio": 2.1801075155307217,
-      "calmar_ratio": 0.8756368477981616,
-      "win_rate": 0.5811758696733001,
-      "total_trades": 137
-    }
-  ],
-  "macroClusteringAffinityPropagationData": [
-    {
-      "strategy_name": "Macro AffinityPropagation Clustering Analysis",
-      "method_name": "AffinityPropagation",
-      "method_params": "3 variants tested",
-      "dimensions": 12,
-      "variants_tested": 3,
-      "description": "Affinity Propagation finds exemplars among data points",
-      "tooltip": "Clustering by passing messages between data points to identify representative exemplars for each cluster.",
-      "terminal_value": 62858.74642883867,
-      "annual_return": 0.21708024888300836,
-      "volatility": 0.1685052664792701,
-      "max_drawdown": -0.05452757657002492,
-      "sharpe_ratio": 2.273358111640487,
-      "sortino_ratio": 2.4547212320901473,
-      "calmar_ratio": 0.6196438391711808,
-      "win_rate": 0.6087402266677368,
-      "total_trades": 107
-    }
-  ],
-  "macroClusteringBirchData": [
-    {
-      "strategy_name": "Macro Birch Clustering Analysis",
-      "method_name": "Birch",
-      "method_params": "3 variants tested",
-      "dimensions": 23,
-      "variants_tested": 3,
-      "description": "BIRCH incrementally clusters large datasets using CF-tree",
-      "tooltip": "Memory-efficient clustering for large datasets using Clustering Feature tree structure.",
-      "terminal_value": 92937.22891478287,
-      "annual_return": 0.19442471670108466,
-      "volatility": 0.15265496035766954,
-      "max_drawdown": -0.07658936969106452,
-      "sharpe_ratio": 1.3037655198380482,
-      "sortino_ratio": 2.4049198121074964,
-      "calmar_ratio": 0.7170251459693476,
-      "win_rate": 0.5919804088149726,
-      "total_trades": 139
-    }
-  ],
-  "macroClusteringBisectingKMeansData": [
-    {
-      "strategy_name": "Macro BisectingKMeans Clustering Analysis",
-      "method_name": "BisectingKMeans",
-      "method_params": "3 variants tested",
-      "dimensions": 24,
-      "variants_tested": 3,
-      "description": "Bisecting K-Means recursively splits clusters using K-Means",
-      "tooltip": "Hierarchical variant of K-Means that splits clusters recursively, providing more stable results.",
-      "terminal_value": 52493.34907161886,
-      "annual_return": 0.21504429230981192,
-      "volatility": 0.1673370989014677,
-      "max_drawdown": -0.0599689386507645,
-      "sharpe_ratio": 2.168547100046306,
-      "sortino_ratio": 2.028714335133583,
-      "calmar_ratio": 0.7422583956049115,
-      "win_rate": 0.6006817112662297,
-      "total_trades": 67
+      "strategy_name": "Macro Agglomerative Clustering Analysis",
+      "method_name": "Agglomerative",
+      "method_params": "4 variants tested",
+      "dimensions": 25,
+      "variants_tested": 4,
+      "description": "Hierarchical clustering builds tree of clusters using linkage criteria",
+      "tooltip": "Bottom-up clustering that merges closest clusters iteratively. Provides hierarchy of relationships between economic indicators.",
+      "terminal_value": 67215.06354818484,
+      "annual_return": 0.2579077579487006,
+      "volatility": 0.16444138861569776,
+      "max_drawdown": -0.20418057979760668,
+      "sharpe_ratio": 0.9287747586604503,
+      "sortino_ratio": 1.7771350751328736,
+      "calmar_ratio": 1.809064575049156,
+      "win_rate": 0.5978790769376198,
+      "total_trades": 140
     }
   ]
 }
