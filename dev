@@ -8,12 +8,12 @@ echo "=================================="
 cd /home/ib/trading-dashboard-dev
 
 # Make sure we're on development branch
-git checkout development
+git checkout development 2>/dev/null || echo "Git checkout failed or not in repo"
 
-# Start development server
-echo "📍 Starting local server at http://localhost:8000"
+# Start development server with auto port detection
+echo "📍 Starting local server (auto-detecting port)..."
 echo "💡 Press Ctrl+C to stop"
 echo "✨ Edit files and refresh browser to see changes!"
 echo ""
 
-python dev-server.py --port 8000
+python3 dev-server.py --port 8000
