@@ -1,0 +1,35 @@
+#!/bin/bash
+# 🚀 Deploy to Staging - Just run: ./deploy
+
+echo "🚀 DEPLOYING TO STAGING"
+echo "======================="
+
+cd /home/ib/trading-dashboard-dev
+
+# Make sure we're on development branch
+git checkout development
+
+# Push to development branch (triggers CI tests)
+echo "📤 Pushing changes to GitHub..."
+git push origin development
+
+# Check if there are any differences with staging
+if git diff --quiet development origin/staging 2>/dev/null; then
+    echo "✅ No new changes to deploy"
+    exit 0
+fi
+
+echo ""
+echo "✅ Changes pushed to development branch!"
+echo "🧪 GitHub Actions will run tests automatically"
+echo ""
+echo "📋 NEXT STEPS:"
+echo "1. Go to: https://github.com/murdochfoo/trading-dashboard-public"
+echo "2. Click 'Pull requests' tab"
+echo "3. Click 'New pull request'"
+echo "4. Select: development → staging"
+echo "5. Click 'Create pull request'"
+echo "6. Wait for tests to pass ✅"
+echo "7. Click 'Merge pull request'"
+echo ""
+echo "🎯 Or just run: ./deploy-staging"

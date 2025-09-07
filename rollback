@@ -1,0 +1,42 @@
+#!/bin/bash
+# ⏪ Emergency Rollback - Just run: ./rollback
+
+echo "⏪ EMERGENCY ROLLBACK"
+echo "===================="
+
+cd /home/ib/trading-dashboard-dev
+
+# Warning
+echo "⚠️  WARNING: This will undo the last deployment!"
+echo ""
+read -p "Are you sure? Type 'yes' to continue: " -r
+echo ""
+
+if [[ ! $REPLY =~ ^[Yy][Ee][Ss]$ ]]; then
+    echo "❌ Rollback cancelled"
+    exit 1
+fi
+
+# Go to main branch and rollback
+git checkout main
+git pull origin main
+
+# Show last few commits
+echo "📜 Recent commits:"
+git log --oneline -5
+
+echo ""
+read -p "How many commits to rollback? (usually 1): " -r commits
+commits=${commits:-1}
+
+# Rollback
+git reset --hard HEAD~$commits
+
+# Force push (careful!)
+echo "⏪ Rolling back $commits commit(s)..."
+git push --force-with-lease origin main
+
+echo ""
+echo "✅ ROLLBACK COMPLETE!"
+echo "🌐 Website will update in ~2-3 minutes"
+echo "🔍 Check status: ./check-live"

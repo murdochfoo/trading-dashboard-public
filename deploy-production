@@ -1,0 +1,45 @@
+#!/bin/bash
+# 🌟 Deploy to Production - Just run: ./deploy-production
+
+echo "🌟 DEPLOYING TO PRODUCTION"
+echo "=========================="
+
+cd /home/ib/trading-dashboard-dev
+
+# Warning message
+echo "⚠️  WARNING: This will deploy to LIVE website!"
+echo "🌐 Site: https://murdochfoo.github.io/trading-dashboard-public/"
+echo ""
+read -p "Are you sure? Type 'yes' to continue: " -r
+echo ""
+
+if [[ ! $REPLY =~ ^[Yy][Ee][Ss]$ ]]; then
+    echo "❌ Deployment cancelled"
+    exit 1
+fi
+
+# Merge staging to main
+echo "🔄 Merging staging → main (production)..."
+git checkout staging
+git pull origin staging
+
+git checkout main
+git pull origin main
+git merge staging
+
+# Push to production
+git push origin main
+
+echo ""
+echo "🎉 DEPLOYED TO PRODUCTION!"
+echo "================================"
+echo "🌟 Your site is live at:"
+echo "   https://murdochfoo.github.io/trading-dashboard-public/"
+echo ""
+echo "🧪 GitHub Actions will:"
+echo "   - Run full test suite"
+echo "   - Security scan"
+echo "   - Deploy to GitHub Pages"
+echo "   - Verify deployment"
+echo ""
+echo "⏰ Changes will be live in ~2-3 minutes"

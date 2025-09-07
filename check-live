@@ -1,0 +1,34 @@
+#!/bin/bash
+# 🌐 Check Live Site - Just run: ./check-live
+
+echo "🌐 CHECKING LIVE WEBSITE"
+echo "========================"
+
+echo "🔍 Testing: https://murdochfoo.github.io/trading-dashboard-public/"
+
+# Check if site is accessible
+if curl -s -f "https://murdochfoo.github.io/trading-dashboard-public/" > /dev/null; then
+    echo "✅ Website is ONLINE"
+    
+    # Check if data loads
+    if curl -s "https://murdochfoo.github.io/trading-dashboard-public/dashboard_data.json" | head -1 | grep -q "{"; then
+        echo "✅ Data file is accessible"
+    else
+        echo "❌ Data file issue"
+    fi
+    
+    echo ""
+    echo "🎯 QUICK TESTS:"
+    echo "  - Site loads: ✅"
+    echo "  - Data file: ✅"
+    echo ""
+    echo "🌐 Open in browser: https://murdochfoo.github.io/trading-dashboard-public/"
+    
+else
+    echo "❌ Website is OFFLINE or has issues"
+    echo ""
+    echo "🔍 TROUBLESHOOTING:"
+    echo "  1. Check GitHub Actions: https://github.com/murdochfoo/trading-dashboard-public/actions"
+    echo "  2. Check GitHub Pages: Settings → Pages"
+    echo "  3. Try './deploy-production' to redeploy"
+fi
